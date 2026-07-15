@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Conference on Combinatorics — IISc Bangalore, 17–21 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111634;
+    --ink-2:#1e2650;
+    --paper:#F5F6FB;
+    --paper-2:#FFFFFF;
+    --blue:#2E4B9A;
+    --blue-bright:#5273cf;
+    --gold:#BC7E24;
+    --gold-soft:#E0AC55;
+    --line:#DBDFEC;
+    --muted:#565d7e;
+    --text:#1a1f3d;
+    --node:#7f92c9;
+    --maxw:1120px;
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3{font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:60;
+    background:rgba(245,246,251,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Space Mono',monospace;font-size:.82rem;letter-spacing:.04em;font-weight:700;color:var(--ink)}
+  .brand svg{flex:none}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:.86rem;text-decoration:none;color:var(--muted);font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{
+    font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;
+    background:var(--ink);color:#fff;padding:9px 18px;border-radius:8px;text-decoration:none;
+    transition:background .2s
+  }
+  .nav-cta:hover{background:var(--blue)}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;color:var(--ink)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;background:var(--ink);color:#eef1fb;overflow:hidden}
+  .hero-graph{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .hero-inner{position:relative;z-index:2;padding:96px 28px 104px;max-width:var(--maxw);margin:0 auto}
+  .hero .kicker{
+    font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold-soft);margin-bottom:26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap
+  }
+  .hero .kicker::before{content:"";width:34px;height:1px;background:var(--gold-soft);display:inline-block}
+  .hero h1{
+    font-size:clamp(2.5rem,6vw,4.6rem);font-weight:600;color:#fff;max-width:15ch;
+    letter-spacing:-.02em;margin-bottom:8px
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:500}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:0;margin-top:40px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r);overflow:hidden;max-width:720px}
+  .fact{flex:1 1 200px;padding:18px 22px;border-right:1px solid rgba(255,255,255,.12)}
+  .fact:last-child{border-right:0}
+  .fact .lbl{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#8f9bc9;margin-bottom:5px}
+  .fact .val{font-family:'Spectral',serif;font-size:1.12rem;color:#fff;font-weight:500}
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{
+    font-size:.9rem;font-weight:600;text-decoration:none;padding:13px 26px;border-radius:9px;
+    display:inline-flex;align-items:center;gap:9px;transition:transform .15s,background .2s,border-color .2s
+  }
+  .btn-gold{background:var(--gold);color:#241701}
+  .btn-gold:hover{background:var(--gold-soft);transform:translateY(-1px)}
+  .btn-ghost{border:1px solid rgba(255,255,255,.28);color:#eef1fb}
+  .btn-ghost:hover{border-color:#fff;transform:translateY(-1px)}
+
+  /* ---------- CO-BRAND STRIP ---------- */
+  .cobrand{background:var(--paper-2);border-bottom:1px solid var(--line);padding:32px 0}
+  .cobrand-inner{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+  .cobrand .eyebrow{color:var(--muted)}
+  .cobrand-logos{display:flex;align-items:center;gap:44px;flex-wrap:wrap;justify-content:center}
+  .cobrand-logos a{display:inline-flex;align-items:center;text-decoration:none}
+  .cobrand-logos img{height:70px;width:auto;display:block}
+  .cobrand-fallback{font-family:'Spectral',serif;font-size:1.05rem;color:var(--ink);font-weight:500;max-width:20ch}
+  .cobrand-divider{width:1px;height:56px;background:var(--line)}
+  @media(max-width:560px){.cobrand-divider{display:none}.cobrand-logos{gap:28px}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:88px 0}
+  .sec-head{max-width:60ch;margin-bottom:52px}
+  .sec-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);color:var(--ink);margin:14px 0 0}
+  .sec-head p{color:var(--muted);margin-top:16px;font-size:1.02rem}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:start}
+  .about-lead{font-family:'Spectral',serif;font-size:1.35rem;line-height:1.5;color:var(--ink);font-weight:400}
+  .about-body p{color:var(--muted);margin-top:18px}
+  .themes{border-left:2px solid var(--gold);padding-left:24px}
+  .themes .eyebrow{margin-bottom:16px;display:block}
+  .themes ul{list-style:none}
+  .themes li{
+    font-family:'Space Mono',monospace;font-size:.83rem;color:var(--ink);
+    padding:9px 0;border-bottom:1px dashed var(--line);display:flex;gap:11px;align-items:baseline
+  }
+  .themes li::before{content:"◦";color:var(--gold);font-size:1rem}
+  .themes li:last-child{border-bottom:0}
+
+  /* ---------- SPEAKERS ---------- */
+  .spk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .spk{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);
+    padding:24px 24px 22px;position:relative;transition:border-color .2s,transform .2s,box-shadow .2s
+  }
+  .spk:hover{border-color:var(--blue-bright);transform:translateY(-3px);box-shadow:0 14px 34px -22px rgba(30,38,80,.5)}
+  .spk .dot{
+    width:10px;height:10px;border-radius:50%;background:var(--blue);position:absolute;top:24px;right:24px
+  }
+  .spk.intl .dot{background:var(--gold)}
+  .spk h3{font-size:1.18rem;color:var(--ink);margin-bottom:4px;padding-right:20px}
+  .spk .aff{font-size:.9rem;color:var(--muted);margin-bottom:2px}
+  .spk .country{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:inline-block}
+  .spk .area{
+    font-family:'Space Mono',monospace;font-size:.73rem;color:var(--ink-2);
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 10px;display:inline-block;line-height:1.4
+  }
+  .spk-note{margin-top:30px;font-size:.9rem;color:var(--muted);font-style:italic;display:flex;align-items:center;gap:10px}
+  .spk-note::before{content:"";width:24px;height:1px;background:var(--gold)}
+  .legend{display:flex;gap:24px;margin-top:8px;flex-wrap:wrap}
+  .legend span{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+  .legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+  /* ---------- SCHEDULE ---------- */
+  .schedule{background:var(--ink);color:#eef1fb}
+  .schedule .sec-head h2{color:#fff}
+  .schedule .sec-head p{color:#b7bfe4}
+  .schedule .eyebrow{color:var(--gold-soft)}
+  .days{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .day{border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:20px 18px;background:rgba(255,255,255,.03)}
+  .day .dnum{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.16em;color:var(--gold-soft);text-transform:uppercase}
+  .day .dname{font-family:'Spectral',serif;font-size:1.3rem;color:#fff;margin:6px 0 16px}
+  .day .slot{font-size:.82rem;color:#aab3dc;padding:8px 0;border-top:1px dashed rgba(255,255,255,.14)}
+  .day .slot b{color:#e7ebfa;font-weight:500}
+  .sched-note{font-family:'Space Mono',monospace;font-size:.76rem;color:#8f9bc9;margin-top:26px;letter-spacing:.03em}
+
+  /* ---------- INFO (venue / register) ---------- */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:34px}
+  .card h3{font-size:1.4rem;color:var(--ink);margin-bottom:6px}
+  .card .eyebrow{display:block;margin-bottom:14px}
+  .card p{color:var(--muted);margin-top:12px;font-size:.96rem}
+  .card address{font-style:normal;font-family:'Spectral',serif;font-size:1.15rem;color:var(--ink);line-height:1.5;margin-top:8px}
+  .tbd{font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.08em;color:var(--gold);background:#faf3e6;border:1px solid var(--gold-soft);border-radius:6px;padding:4px 9px;display:inline-block;margin-top:16px}
+  .card .btn{margin-top:22px}
+  .venue-photo{position:relative;width:100%;aspect-ratio:16/10;border-radius:11px;overflow:hidden;margin-bottom:24px;border:1px solid var(--line);background:linear-gradient(135deg,#eef1f8,#dfe5f3)}
+  .venue-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+  .venue-photo .ph{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted)}
+  .venue-photo .ph .pmono{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  .venue-photo .ph span:last-child{font-family:'Spectral',serif;font-size:1.05rem;color:var(--ink)}
+  .btn-solid{background:var(--ink);color:#fff}
+  .btn-solid:hover{background:var(--blue);transform:translateY(-1px)}
+
+  /* ---------- ORGANIZERS ---------- */
+  .org{background:var(--paper-2);border-top:1px solid var(--line)}
+  .hosts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:44px}
+  .host{border:1px solid var(--line);border-radius:var(--r);padding:28px 30px;display:flex;flex-direction:column;gap:6px}
+  .host .role{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .host .name{font-family:'Spectral',serif;font-size:1.35rem;color:var(--ink);font-weight:500}
+  .host .place{color:var(--muted);font-size:.92rem}
+  .contact-line{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:1px solid var(--line);padding-top:28px}
+  .contact-line .q{font-family:'Spectral',serif;font-size:1.2rem;color:var(--ink)}
+  .committee-label{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  .committee{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:44px}
+  .member{border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:10px}
+  .member .mnode{width:11px;height:11px;border-radius:50%;background:var(--blue)}
+  .member.imsc .mnode{background:var(--gold)}
+  .member .mname{font-family:'Spectral',serif;font-size:1.18rem;color:var(--ink);font-weight:500;line-height:1.2}
+  .member .mplace{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+  @media(max-width:760px){.committee{grid-template-columns:1fr 1fr}}
+  @media(max-width:440px){.committee{grid-template-columns:1fr}}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#aab3dc;padding:48px 0}
+  .foot-inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot-inner .fbrand{font-family:'Spectral',serif;color:#fff;font-size:1.15rem}
+  .foot-inner .fmeta{font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.06em;color:#7d88b8;text-align:right;line-height:1.9}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr;gap:40px}
+    .spk-grid{grid-template-columns:repeat(2,1fr)}
+    .days{grid-template-columns:1fr 1fr}
+    .info-grid,.hosts{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .nav-links.open{display:flex;position:absolute;top:64px;left:0;right:0;background:var(--paper-2);flex-direction:column;padding:18px 28px;gap:18px;border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:560px){
+    .spk-grid{grid-template-columns:1fr}
+    .days{grid-template-columns:1fr}
+    .hero-facts .fact{flex:1 1 100%;border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+    .hero-facts .fact:last-child{border-bottom:0}
+    section{padding:64px 0}
+    .hero-inner{padding:72px 24px 80px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Conference home">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <circle cx="4" cy="4" r="2.6" fill="#BC7E24"/>
+        <circle cx="22" cy="6" r="2.6" fill="#2E4B9A"/>
+        <circle cx="7" cy="21" r="2.6" fill="#2E4B9A"/>
+        <circle cx="20" cy="20" r="2.6" fill="#2E4B9A"/>
+        <path d="M4 4 L22 6 M4 4 L7 21 M22 6 L20 20 M7 21 L20 20 M4 4 L20 20" stroke="#111634" stroke-width="1" opacity=".55"/>
+      </svg>
+      ICC&nbsp;2026
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#venue">Venue</a>
+      <a href="#register" class="nav-cta">Register</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="hero-graph" id="heroGraph" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  <div class="hero-inner">
+    <div class="kicker">IMSc Chennai &nbsp;×&nbsp; IISc Bangalore</div>
+    <h1>International Conference on <em>Combinatorics</em></h1>
+    <div class="hero-facts">
+      <div class="fact"><div class="lbl">Dates</div><div class="val">17–21 August 2026</div></div>
+      <div class="fact"><div class="lbl">Location</div><div class="val">Dept. of Mathematics, IISc</div></div>
+      <div class="fact"><div class="lbl">City</div><div class="val">Bengaluru, India</div></div>
+    </div>
+    <div class="hero-actions">
+      <a href="#register" class="btn btn-gold">Register interest →</a>
+      <a href="#speakers" class="btn btn-ghost">See speakers</a>
+    </div>
+  </div>
+</section>
+
+<!-- CO-BRAND -->
+<section class="cobrand">
+  <div class="wrap cobrand-inner">
+    <span class="eyebrow">Jointly organized by</span>
+    <div class="cobrand-logos">
+      <a href="https://www.imsc.res.in/" target="_blank" rel="noopener" aria-label="The Institute of Mathematical Sciences, Chennai">
+        <img src="imsclogo_trilingual_600_new.png"
+             alt="The Institute of Mathematical Sciences, Chennai"
+             onerror="this.style.display='none';this.parentNode.querySelector('.cobrand-fallback').style.display='inline'">
+        <span class="cobrand-fallback" style="display:none">The Institute of Mathematical Sciences, Chennai</span>
+      </a>
+      <span class="cobrand-divider"></span>
+      <a href="https://www.iisc.ac.in/" target="_blank" rel="noopener" aria-label="Indian Institute of Science, Bengaluru">
+        <img src="IISc_Master_Seal_Transparent.png"
+             alt="Indian Institute of Science, Bengaluru"
+             onerror="this.style.display='none';this.parentNode.querySelector('.cobrand-fallback').style.display='inline'">
+        <span class="cobrand-fallback" style="display:none">Indian Institute of Science, Bengaluru</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">About the conference</span>
+        <p class="about-lead" style="margin-top:16px">A gathering of combinatorialists from India and abroad, hosted jointly by The Institute of Mathematical Sciences, Chennai and the Indian Institute of Science, Bengaluru.</p>
+        <div class="about-body">
+          <p>Combinatorics has grown into a meeting point for much of modern mathematics — its questions surface in representation theory and algebra, in probability and statistical physics, in geometry, and in theoretical computer science. This conference brings together researchers working across that range for a week of talks and conversation at IISc.</p>
+          <p>The programme features invited talks from international and Indian speakers. Details on contributed talks, a poster session, and participation for students and early-career researchers will be announced as planning continues.</p>
+        </div>
+      </div>
+      <div class="themes">
+        <span class="eyebrow">Themes</span>
+        <ul>
+          <li>Algebraic &amp; enumerative combinatorics</li>
+          <li>Graph theory &amp; structural graph theory</li>
+          <li>Representation theory</li>
+          <li>Extremal &amp; probabilistic combinatorics</li>
+          <li>Combinatorics &amp; mathematical physics</li>
+          <li>Combinatorics in computer science</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section id="speakers">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Invited speakers</span>
+      <h2>Confirmed speakers</h2>
+      <p>Researchers who have confirmed their participation. More speakers will be added as invitations are accepted.</p>
+      <div class="legend">
+        <span><i style="background:#BC7E24"></i> International</span>
+        <span><i style="background:#2E4B9A"></i> India</span>
+      </div>
+    </div>
+    <div class="spk-grid" id="spkGrid"><!-- filled by JS --></div>
+    <p class="spk-note">Further speakers to be announced.</p>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Programme</span>
+      <h2>Schedule at a glance</h2>
+      <p>A tentative outline of the week. The detailed timetable with talk titles and abstracts will be published closer to the conference.</p>
+    </div>
+    <div class="days">
+      <div class="day"><div class="dnum">Day 01 · 17 Aug</div><div class="dname">Monday</div>
+        <div class="slot"><b>Morning</b><br>Registration &amp; opening</div>
+        <div class="slot"><b>Sessions</b><br>Invited talks</div>
+        <div class="slot"><b>Evening</b><br>Welcome tea</div>
+      </div>
+      <div class="day"><div class="dnum">Day 02 · 18 Aug</div><div class="dname">Tuesday</div>
+        <div class="slot"><b>Morning</b><br>Invited talks</div>
+        <div class="slot"><b>Afternoon</b><br>Invited talks</div>
+      </div>
+      <div class="day"><div class="dnum">Day 03 · 19 Aug</div><div class="dname">Wednesday</div>
+        <div class="slot"><b>Morning</b><br>Invited talks</div>
+        <div class="slot"><b>Afternoon</b><br>Poster session <span style="opacity:.6">(TBC)</span></div>
+      </div>
+      <div class="day"><div class="dnum">Day 04 · 20 Aug</div><div class="dname">Thursday</div>
+        <div class="slot"><b>Morning</b><br>Invited talks</div>
+        <div class="slot"><b>Afternoon</b><br>Invited talks</div>
+      </div>
+      <div class="day"><div class="dnum">Day 05 · 21 Aug</div><div class="dname">Friday</div>
+        <div class="slot"><b>Morning</b><br>Invited talks</div>
+        <div class="slot"><b>Afternoon</b><br>Closing</div>
+      </div>
+    </div>
+    <p class="sched-note">// Tentative — subject to change</p>
+  </div>
+</section>
+
+<!-- VENUE & REGISTER -->
+<section id="venue">
+  <div class="wrap">
+    <div class="info-grid">
+      <div class="card">
+        <div class="venue-photo">
+          <img src="maths-dept.jpg" alt="Department of Mathematics, Indian Institute of Science, Bengaluru" onerror="this.remove()">
+          <div class="ph"><span class="pmono">Department of Mathematics</span><span>Indian Institute of Science</span></div>
+        </div>
+        <span class="eyebrow">Venue</span>
+        <h3>Department of Mathematics</h3>
+        <address>Indian Institute of Science<br>CV Raman Road, Bengaluru 560012<br>Karnataka, India</address>
+        <p>The IISc campus is about 35&nbsp;km from Kempegowda International Airport (BLR) and well connected to central Bengaluru by road and metro. Exact lecture hall and campus directions will be shared with registered participants.</p>
+        <span class="tbd">Room · TBD</span>
+      </div>
+      <div class="card" id="register">
+        <span class="eyebrow">Participation</span>
+        <h3>Registration</h3>
+        <p>Registration for participants, including students and early-career researchers, will open soon. If you would like to attend or present, register your interest and we will be in touch with details, deadlines, and any support available.</p>
+        <span class="tbd">Registration link · TBD</span><br>
+        <a href="mailto:" class="btn btn-solid" id="regBtn">Email the organizers</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZERS -->
+<section class="org" id="organizers">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Organization</span>
+      <h2>Organizers &amp; contact</h2>
+      <p>Jointly organized by The Institute of Mathematical Sciences, Chennai and the Indian Institute of Science, Bengaluru.</p>
+    </div>
+    <div class="hosts">
+      <div class="host">
+        <span class="role">Host institution</span>
+        <span class="name">Indian Institute of Science</span>
+        <span class="place">Department of Mathematics · Bengaluru</span>
+      </div>
+      <div class="host">
+        <span class="role">Co-host institution</span>
+        <span class="name">The Institute of Mathematical Sciences</span>
+        <span class="place">Chennai</span>
+      </div>
+    </div>
+    <p class="committee-label">Organizing committee</p>
+    <div class="committee">
+      <div class="member"><span class="mnode"></span><span class="mname">Arvind Ayyer</span><span class="mplace">IISc Bangalore</span></div>
+      <div class="member"><span class="mnode"></span><span class="mname">Apoorva Khare</span><span class="mplace">IISc Bangalore</span></div>
+      <div class="member"><span class="mnode"></span><span class="mname">R. Venkatesh</span><span class="mplace">IISc Bangalore</span></div>
+      <div class="member imsc"><span class="mnode"></span><span class="mname">S. Viswanath</span><span class="mplace">IMSc Chennai</span></div>
+    </div>
+    <div class="contact-line">
+      <span class="q">Questions about the programme or attending?</span>
+      <a href="mailto:" class="btn btn-solid" id="contactBtn">Contact the organizers</a>
+    </div>
+    <p style="margin-top:22px;font-family:'Space Mono',monospace;font-size:.74rem;color:var(--muted)">// Contact email — TBD</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-inner">
+    <div class="fbrand">International Conference on Combinatorics · 2026</div>
+    <div class="fmeta">
+      17–21 AUGUST 2026 · IISC BENGALURU<br>
+      IMSc CHENNAI × IISc BANGALORE
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ----- Speaker data (Accepted = Y only), alphabetical by last name -----
+  const speakers = [
+    {n:"Priyavrat Deshpande", a:"Chennai Mathematical Institute", c:"", area:"Hyperplane & toric arrangements", intl:false},
+    {n:"Terrence George", a:"TIFR-CAM", c:"", area:"Combinatorics · math-physics", intl:false},
+    {n:"Karthik C. S.", a:"Rutgers University", c:"USA", area:"Complexity · discrete geometry", intl:true},
+    {n:"Hemanshu Kaul", a:"Illinois Institute of Technology", c:"USA", area:"Graph theory", intl:true},
+    {n:"Nishad Kothari", a:"IIT Madras", c:"", area:"Structural graph theory", intl:false},
+    {n:"Nimisha Pahuja", a:"ICTS-TIFR", c:"", area:"Asymmetric exclusion processes", intl:false},
+    {n:"Moumanti Podder", a:"IISER Pune", c:"", area:"Random trees", intl:false},
+    {n:"Patrick Polo", a:"Sorbonne Université", c:"France", area:"Representation theory", intl:true},
+    {n:"Manjil Saikia", a:"Ahmedabad University", c:"", area:"Enumerative & algebraic combinatorics · q-series", intl:false},
+    {n:"Lavanya Selvaganesh", a:"IIT (BHU) Varanasi", c:"", area:"Graph theory", intl:false},
+    {n:"Ambat Vijayakumar", a:"CUSAT", c:"", area:"Graph theory", intl:false},
+  ];
+  const grid = document.getElementById('spkGrid');
+  speakers.forEach(s=>{
+    const el = document.createElement('div');
+    el.className = 'spk' + (s.intl ? ' intl':'');
+    el.innerHTML =
+      '<span class="dot"></span>'+
+      '<h3>'+s.n+'</h3>'+
+      '<div class="aff">'+s.a+'</div>'+
+      (s.c ? '<span class="country">'+s.c+'</span>' : '<span class="country" style="color:var(--muted)">India</span>')+
+      '<div><span class="area">'+s.area+'</span></div>';
+    grid.appendChild(el);
+  });
+
+  // ----- Mobile menu -----
+  const menuBtn = document.getElementById('menuBtn');
+  const links = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', ()=>{
+    const open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    links.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false);
+  }));
+
+  // ----- Hero collaboration graph -----
+  (function(){
+    const svg = document.getElementById('heroGraph');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const W=1200,H=620,N=26;
+    const CYCLE=2500, CYCLES=4;    // four fast reveals of ~2.5s each
+    const nodes=[];
+    for(let i=0;i<N;i++){
+      nodes.push({x:Math.random()*W, y:Math.random()*H, r:2+Math.random()*3.2});
+    }
+    const NS='http://www.w3.org/2000/svg';
+
+    // ---- build edges (store elements) ----
+    const edgeEls=[];
+    for(let i=0;i<N;i++){
+      let d=[];
+      for(let j=0;j<N;j++) if(i!==j){
+        const dist=Math.hypot(nodes[i].x-nodes[j].x, nodes[i].y-nodes[j].y);
+        d.push({j,dist});
+      }
+      d.sort((a,b)=>a.dist-b.dist);
+      const k=1+Math.floor(Math.random()*2);
+      for(let m=0;m<k;m++){
+        const j=d[m].j;
+        if(j>i){
+          const line=document.createElementNS(NS,'line');
+          line.setAttribute('x1',nodes[i].x);line.setAttribute('y1',nodes[i].y);
+          line.setAttribute('x2',nodes[j].x);line.setAttribute('y2',nodes[j].y);
+          line.setAttribute('stroke','#4a5891');
+          line.setAttribute('stroke-width','1');
+          line.setAttribute('opacity','0');
+          svg.appendChild(line);
+          const len=d[m].dist;
+          line.style.strokeDasharray=len;line.style.strokeDashoffset=len;
+          edgeEls.push({el:line,len:len});
+        }
+      }
+    }
+
+    // ---- build nodes (store elements) ----
+    const nodeEls=[];
+    nodes.forEach((nd,i)=>{
+      const c=document.createElementNS(NS,'circle');
+      c.setAttribute('cx',nd.x);c.setAttribute('cy',nd.y);c.setAttribute('r',nd.r);
+      const gold=Math.random()<0.22;
+      c.setAttribute('fill', gold ? '#E0AC55' : '#8090c4');
+      c.setAttribute('opacity','0');
+      svg.appendChild(c);
+      nodeEls.push({el:c,vis:gold?0.9:0.6});
+    });
+
+    if(reduce){
+      edgeEls.forEach(e=>{e.el.style.strokeDashoffset=0;e.el.setAttribute('opacity','.3');});
+      nodeEls.forEach(n=>n.el.setAttribute('opacity',n.vis));
+      return;
+    }
+
+    // one fast staggered draw-in (the original reveal)
+    function fadeIn(){
+      nodeEls.forEach((n,i)=>{
+        n.el.animate(
+          [{opacity:0,transform:'scale(0)'},{opacity:n.vis,transform:'scale(1)'}],
+          {duration:650,delay:150+i*36,fill:'forwards',easing:'cubic-bezier(.2,.8,.2,1)'}
+        );
+      });
+      edgeEls.forEach(e=>{
+        e.el.animate(
+          [{strokeDashoffset:e.len,opacity:0},{strokeDashoffset:0,opacity:.35}],
+          {duration:1050,delay:250+Math.random()*650,fill:'forwards',easing:'ease-out'}
+        );
+      });
+    }
+    // fade the whole graph back out before the next redraw
+    function fadeOut(){
+      nodeEls.forEach((n,i)=>{
+        n.el.animate(
+          [{opacity:n.vis,transform:'scale(1)'},{opacity:0,transform:'scale(.3)'}],
+          {duration:400,delay:i*6,fill:'forwards',easing:'ease-in'}
+        );
+      });
+      edgeEls.forEach(e=>{
+        e.el.animate([{opacity:.35},{opacity:0}],{duration:400,fill:'forwards',easing:'ease-in'});
+      });
+    }
+    // gentle ambient drift once the final reveal has settled
+    function startDrift(){
+      nodeEls.forEach(n=>{
+        n.el.animate(
+          [{transform:'translateY(0)'},{transform:'translateY('+(Math.random()*10-5)+'px)'}],
+          {duration:4500+Math.random()*3000,direction:'alternate',iterations:Infinity,easing:'ease-in-out'}
+        );
+      });
+    }
+
+    // orchestrate: draw in, vanish, redraw — four times — then settle
+    for(let c=0;c<CYCLES;c++){
+      setTimeout(fadeIn, c*CYCLE);
+      if(c<CYCLES-1) setTimeout(fadeOut, c*CYCLE+2000);
+    }
+    setTimeout(startDrift, (CYCLES-1)*CYCLE+1900);
+  })();
+</script>
+</body>
+</html>
